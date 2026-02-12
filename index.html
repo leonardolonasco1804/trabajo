@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¿Quieres ser mi San Valentín? 💘</title>
+  <style>
+    :root{
+      --bg1:#ffdde1;
+      --bg2:#ee9ca7;
+      --card:#ffffffcc;
+      --text:#2b2b2b;
+      --accent:#ff2d55;
+      --accent2:#ff6b81;
+      --shadow: 0 18px 45px rgba(0,0,0,.18);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background: linear-gradient(135deg, #b11226, #ff2d55, #ff6b81);
+      overflow:hidden;
+    }
+
+
+    .card{
+      width:min(680px, 92vw);
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.55);
+      box-shadow:var(--shadow);
+      border-radius:24px;
+      padding:28px 24px;
+      backdrop-filter: blur(10px);
+      position:relative;
+      z-index:2;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      background:rgba(255,255,255,.8);
+      border-radius:999px;
+      font-weight:600;
+      border:1px solid rgba(0,0,0,.06);
+    }
+
+    h1{
+      margin:16px 0 8px;
+      font-size:clamp(30px, 4vw, 42px);
+      line-height:1.05;
+      letter-spacing:-0.02em;
+    }
+
+    p{
+      margin:10px 0 0;
+      font-size:clamp(16px, 2.4vw, 18px);
+      line-height:1.5;
+      opacity:.95;
+    }
+
+    .details{
+      margin-top:18px;
+      padding:14px 16px;
+      background:rgba(255,255,255,.75);
+      border-radius:16px;
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .details b{color:#111}
+
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+      align-items:center;
+    }
+
+    button{
+      border:0;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:16px;
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+      user-select:none;
+    }
+    button:active{transform:translateY(1px) scale(.99)}
+
+    .yes{
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      color:white;
+      box-shadow: 0 10px 25px rgba(255,45,85,.35);
+    }
+    .yes:hover{box-shadow: 0 14px 30px rgba(255,45,85,.45)}
+
+    .maybe{
+      background:rgba(255,255,255,.9);
+      border:1px solid rgba(0,0,0,.12);
+      color:#222;
+    }
+    .maybe:hover{background:white}
+
+    .note{
+      margin-top:14px;
+      font-size:14px;
+      opacity:.8;
+    }
+
+    .heart{
+      position:absolute;
+      bottom:-40px;
+      font-size:24px;
+      opacity:.9;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 6px 8px rgba(0,0,0,.15));
+      z-index:1;
+      pointer-events:none;
+    }
+    @keyframes floatUp{
+      from { transform: translateY(0) translateX(0) rotate(0deg); opacity:.95; }
+      to   { transform: translateY(-120vh) translateX(var(--drift)) rotate(25deg); opacity:0; }
+    }
+
+    .toast{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(0,0,0,.06);
+      display:none;
+    }
+    .toast.show{display:block}
+    .toast h2{margin:0 0 6px; font-size:20px}
+    .toast a{
+      color:var(--accent);
+      font-weight:700;
+      text-decoration:none;
+    }
+    .toast a:hover{text-decoration:underline}
+
+    .sig{
+      margin-top:14px;
+      font-weight:700;
+      color:#111;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .sig span{
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(0,0,0,.06);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">💌 PARA: Fresita 🍓🍓 bonita</div>
+
+    <h1>¿Quieres ser mi san valentin? 💘</h1>
+    <p>
+      Te invito a celebrar nuestro 4to san valentin❤️❤️ juntos.
+    </p>
+
+    <div class="details">
+      <p><b>📅 Día:</b> <span id="dia">14 de febrero</span></p>
+      <p><b>🕗 Hora:</b> <span id="hora">8:00 pm</span></p>
+      <p><b>📍 Lugar:</b> <span id="lugar">Tinto</span></p>
+    </div>
+
+    <div class="cta">
+      <button class="yes" id="btnYes">OBVIO QUE si amor💖</button>
+      <button class="maybe" id="btnMaybe">Déjame pensarlo 🤔🤔</button>
+    </div>
+
+    <div class="toast" id="toast">
+      <h2>GOOO amor</h2>
+      <p>
+        vamos a divertirnos pepuñito<br/>
+        <a id="waLink" href="#" target="_blank" rel="noreferrer">Confirmar por WhatsApp</a>
+      </p>
+    </div>
+
+    <div class="sig">
+      <span>Con cariño:</span>
+      <span id="firma">Leito</span>
+    </div>
+
+    <div class="note"></div>
+  </div>
+
+  <script>
+    const nombreDeElla = "Cristina";  
+    const tuNombre = "Leonardo";     
+    const dia = "14 de febrero";
+    const hora = "8:00 pm";
+    const lugar = "Tinto";
+
+    if (nombreDeElla) document.querySelector("h1").textContent = `¿${nombreDeElla}, quieres ser mi San Valentín? 💘`;
+    if (tuNombre) document.getElementById("firma").textContent = tuNombre;
+    document.getElementById("dia").textContent = dia;
+    document.getElementById("hora").textContent = hora;
+    document.getElementById("lugar").textContent = lugar;
+
+    const toast = document.getElementById("toast");
+    const waLink = document.getElementById("waLink");
+
+    document.getElementById("btnYes").addEventListener("click", () => {
+      toast.classList.add("show");
+      shootHearts(18);
+
+      const msgBonito = `Si amor, vamos a tinto, eres el mejor del mundo, te amo muchisimo y gracias por la carta, despues habra regalito 😈😈`;
+
+      const msgWhatsApp = "Fresita entonces vamos a Tinto el 14 a las 8:00 pm?";
+
+      waLink.href = waLink.href = `https://wa.me/51949517620?text=${encodeURIComponent(msgBonito)}`;;
+    });
+
+    const maybe = document.getElementById("btnMaybe");
+    maybe.addEventListener("mouseenter", () => {
+      const dx = (Math.random() * 120) - 60;
+      const dy = (Math.random() * 70) - 35;
+      maybe.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+    maybe.addEventListener("mouseleave", () => {
+      maybe.style.transform = `translate(0, 0)`;
+    });
+    maybe.addEventListener("click", () => {
+      shootHearts(10);
+      alert("atsuuuuuuuuuuu mare");
+    });
+
+    function shootHearts(n){
+      const hearts = ["💖","💘","💞","❤️", "🍓", "💗","💕","💞","❤️", "🍓","💞","❤️", "🍓","💞","❤️", "🍓"];
+      for(let i=0;i<n;i++){
+        const el = document.createElement("div");
+        el.className = "heart";
+        el.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+        el.style.left = Math.random()*100 + "vw";
+        el.style.fontSize = (18 + Math.random()*22) + "px";
+        el.style.setProperty("--drift", ((Math.random()*120)-60) + "px");
+        el.style.animationDuration = (3 + Math.random()*2.5) + "s";
+        el.style.animationDelay = (Math.random()*0.25) + "s";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6500);
+      }
+    }
+
+    setTimeout(() => shootHearts(40), 1);
+  </script>
+</body>
+</html>
